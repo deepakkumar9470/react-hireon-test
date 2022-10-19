@@ -9,12 +9,12 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    width: 600px;
+    position: relative;
 }
 
 .input_Div input{
     width: 100%;
-    position: relative;
+   
     padding: 10px;
     border-radius: 15px;
     color: #000;
@@ -28,9 +28,9 @@
     font-size: 18px;
     color: rgb(73, 68, 68);
     position: absolute;
-    top: 12%;
+    top: 26%;
     z-index: 999;
-    left: 80px;
+    left: 20px;
 }
 .form_Container{
     display: flex;

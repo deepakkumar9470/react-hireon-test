@@ -4,11 +4,11 @@ import {FaPlus,FaSearch} from 'react-icons/fa'
 import axios from 'axios'
 
 const Home = () => {
-
+ 
     const [inputs,setInputs] = useState({
         title:  "", desc : ""
     })
-    const [colorData,setColor]  = useState([])
+    const [colorData,setColor]  = useState(null)
     const [val,setVal] = useState('')
 
     useEffect(() => {
@@ -34,19 +34,22 @@ const Home = () => {
           }
         
         setInputs({...inputs, userData})
+        localStorage.setItem('items', JSON.stringify(inputs))
+        setInputs('')
         alert('data added')
         e.preventDefault()
     }
 
     const searchHandler= (e) =>{
-        if(!val){
-            alert('Please enter to search')
-        }
-        
-
-    
         e.preventDefault()
+        setVal(e.target.val)
     }
+
+    const filtered = !val
+    ? inputs
+    : inputs.filter((item) =>
+     inputs.title.toLowerCase().includes(item.toLowerCase())
+      );
     
   return (
     <div className='container'>
@@ -64,17 +67,22 @@ const Home = () => {
                    
                    <div className="color_Div">
                     <select name="color" className='select' onChange={setColor}>
-                        {
+                        {/* {
                             colorData?.map((col,i)=>(
                             <div className='options' key={col.id}>
-                             {/* <option className='option' value="Red">
+                             <option className='option' value="Red">
                                 <input type="color"  value={col.code}/>
-                             </option> */}
+                             </option>
                                <input type="color"  value={col.code}/>
                               </div>
                             ))
                             
-                        }
+                        } */}
+
+                        <option value="red">Red</option>
+                        <option value="pink">Pink</option>
+                        <option value="blue">Blue</option>
+                        <option value="green">Green</option>
                     </select>
                    </div>
                    
@@ -100,12 +108,14 @@ const Home = () => {
           <div className="cardContainer">
                 <div className="cards">
                       
-                       {/* {inputs.map((item,i)=>(
+                       {/* {filtered?.map((item,i)=>(
                         <div className="card">
                            <div className="color"></div>
+                           <h2>{item.title}</h2>
+                           <p>{item.desc}</p>
 
                         </div>
-                       ))} */}
+                       ))}  */}
 
                 </div>
           </div>
